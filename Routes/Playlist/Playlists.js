@@ -17,11 +17,11 @@ router.get('/', function(req, res) {
          if (owner)
             req.cnn.chkQry("select id, title, ownerId, \
              UNIX_TIMESTAMP(whenMade) as whenMade, numLikes from \
-             Playlist where ownerId = ?", [owner], cb);
+             Playlist where ownerId = ? order by numLikes DESC, whenMade DESC", [owner], cb);
          else 
             req.cnn.chkQry("select id, title, ownerId, \
              UNIX_TIMESTAMP(whenMade) as whenMade, numLikes from \
-             Playlist", null, cb);
+             Playlist order by numLikes DESC, whenMade DESC", null, cb);
       }
    },
    function(result, fields, cb) {
@@ -87,7 +87,7 @@ router.get('/:pId', function(req, res) {
       else
          req.cnn.chkQry("select id, title, ownerId, \
           UNIX_TIMESTAMP(whenMade) as whenMade, numLikes from \
-          Playlist where id = ?", [pId], cb);
+          Playlist where id = ? order by numLikes DESC, whenMade DESC", [pId], cb);
    },
    function(result, fields, cb) {
       if (vld.check(result.length, Tags.notFound, null, cb)) {

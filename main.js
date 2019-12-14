@@ -72,14 +72,14 @@ app.delete('/DB', function(req, res) {
       req.cnn.release();
       return;
    }
-   var cbs = ["Playlist", "Playlist_Song", "Person"].map(
+   var cbs = ["Playlist", "Playlist_Song", "Song", "Person"].map(
       table => function(cb) {
          req.cnn.query("delete from " + table, cb);
       }
    );
 
    // Callbacks to reset increment bases
-   cbs = cbs.concat(["Playlist", "Playlist_Song", "Person"].map(
+   cbs = cbs.concat(["Playlist", "Playlist_Song", "Song", "Person"].map(
       table => cb => {
          req.cnn.query("alter table " + table + " auto_increment = 1", cb);
       }
@@ -91,6 +91,36 @@ app.delete('/DB', function(req, res) {
        ' password, termsAccepted, role) VALUES ' +
        '("Joe", "Admin", "adm@11.com","password", NOW(), 1);', cb);
    });
+
+
+
+
+
+
+   cbs.push(cb => {
+      req.cnn.query('insert into Song (title, link, artist, genre) \
+       Values ("infinite peace", "https://drive.google.com/open?id=1jY3dd9TnEZkFSA6qiR4Ucb1qA4d1DyVl",\
+       "kevin macleod", "chill");',cb);
+   });
+
+   cbs.push(cb => {
+      req.cnn.query('insert into Song (title, link, artist, genre) \
+       Values ("concerto iii allegro i", "https://drive.google.com/open?id=1olVPcUkrpwby_g4w1oNewWFXft3JNbqa",\
+       "dogsounds", "classical");', cb);
+   });
+
+   cbs.push(cb => {
+      req.cnn.query('insert into Song (title, link, artist, genre) \
+       Values ("funkeriffic", "https://drive.google.com/open?id=1o72Z3OPYJGKNFQM6tvh-PDsqEv5tQh7W",\
+       "kevin macleod", "jazz");', cb);
+   });
+
+   cbs.push(cb => {
+      req.cnn.query('insert into Song (title, link, artist, genre) Values \
+      ("martini sunset", "https://drive.google.com/open?id=1tqiPW6idif-OSUNiHeKUoF74hZpGgI_D",\
+        "anonymous", "jazz");', cb);
+   });
+
 
    // Callback to clear sessions, release connection and return result
    cbs.push(callback => {
