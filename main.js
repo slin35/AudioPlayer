@@ -72,14 +72,14 @@ app.delete('/DB', function(req, res) {
       req.cnn.release();
       return;
    }
-   var cbs = ["Playlist", "Playlist_Song", "Song", "Person"].map(
+   var cbs = ["Playlist", "Playlist_Song", "Person"].map(
       table => function(cb) {
          req.cnn.query("delete from " + table, cb);
       }
    );
 
    // Callbacks to reset increment bases
-   cbs = cbs.concat(["Playlist", "Playlist_Song", "Song", "Person"].map(
+   cbs = cbs.concat(["Playlist", "Playlist_Song", "Person"].map(
       table => cb => {
          req.cnn.query("alter table " + table + " auto_increment = 1", cb);
       }
@@ -91,7 +91,7 @@ app.delete('/DB', function(req, res) {
        ' password, termsAccepted, role) VALUES ' +
        '("Joe", "Admin", "adm@11.com","password", NOW(), 1);', cb);
    });
-
+/*
    cbs.push(cb => {
       req.cnn.query('insert into Song (title, link, artist, genre)' +
        ' Values ("infinite peace", "https://drive.google.com/uc?export=down' +
@@ -116,7 +116,7 @@ app.delete('/DB', function(req, res) {
       req.cnn.query('insert into Song (title, link, artist, genre) Values' +
       '("martini sunset", "https://drive.google.com/uc?export=download&id=1' +
       'tqiPW6idif-OSUNiHeKUoF74hZpGgI_D", "anonymous", "jazz");', cb);
-   });
+   }); */
 
 
    // Callback to clear sessions, release connection and return result
