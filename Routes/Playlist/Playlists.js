@@ -17,11 +17,13 @@ router.get('/', function(req, res) {
          if (owner)
             req.cnn.chkQry("select id, title, ownerId, \
              UNIX_TIMESTAMP(whenMade) as whenMade, numLikes from \
-             Playlist where ownerId = ? order by numLikes DESC, whenMade DESC", [owner], cb);
+             Playlist where ownerId = ? order by numLikes DESC, \
+             UNIX_TIMESTAMP(whenMade) DESC, id DESC", [owner], cb);
          else 
             req.cnn.chkQry("select id, title, ownerId, \
              UNIX_TIMESTAMP(whenMade) as whenMade, numLikes from \
-             Playlist order by numLikes DESC, whenMade DESC", null, cb);
+             Playlist order by numLikes DESC, UNIX_TIMESTAMP(whenMade)\
+             DESC, id DESC", null, cb);
       }
    },
    function(result, fields, cb) {

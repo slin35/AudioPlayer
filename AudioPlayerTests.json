@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "73ce62fe-0486-45b0-8ee4-8b278d172762",
-		"name": "CSC 437 - Audio Player copy - UPDATED",
+		"_postman_id": "b697d9dc-13b7-495c-92dc-2ef15d933839",
+		"name": "FINAL CSC 437 - Audio Player copy - UPDATED copy",
 		"description": "This collection holds the tests for the Audio Player web app our team is doing for our CSC 437 final.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -3707,6 +3707,53 @@
 									"path": [
 										"Playlists",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Check Playlists Again Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "864e3a01-b5f5-4ad1-b6b6-a2127a1a60a1",
+										"exec": [
+											"tests[\"Status is 200\"] = responseCode.code === 200;",
+											"",
+											"var jsonData = JSON.parse(responseBody);",
+											"",
+											"tests[\"Correct 1st Element\"] = jsonData[0] !== undefined",
+											"&& jsonData[0].id === 1",
+											"&& jsonData[0].title === \"How to make pizza with cauliflower\"",
+											"&& jsonData[0].ownerId === 3",
+											"&& jsonData[0].whenMade > 0",
+											"&& jsonData[0].numLikes === 1;",
+											"",
+											"tests[\"Correct 2nd Element\"] = jsonData[1] !== undefined",
+											"&& jsonData[1].id === 2",
+											"&& jsonData[1].title === \"How to make pizza without your cat stealing it\"",
+											"&& jsonData[1].ownerId === 2",
+											"&& jsonData[1].whenMade > 0",
+											"&& jsonData[1].numLikes === 0;",
+											"",
+											"tests[\"No third element\"] = jsonData[2] === undefined;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/Playlists",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"Playlists"
 									]
 								}
 							},
