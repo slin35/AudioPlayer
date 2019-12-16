@@ -94,28 +94,27 @@ app.delete('/DB', function(req, res) {
 
    cbs.push(cb => {
       req.cnn.query('insert into Song (title, link, artist, genre)' +
-       ' Values ("infinite peace", "https://drive.google.com/uc?export=down' +
-       'load&id=1jY3dd9TnEZkFSA6qiR4Ucb1qA4d1DyVl", "kevin macleod", "chill");',cb);
+       ' Values ("infinite peace", "https://www.bensound.com/' +
+       'bensound-music/bensound-buddy.mp3", "kevin macleod", "chill");',cb);
    });
 
    cbs.push(cb => {
       req.cnn.query('insert into Song (title, link, artist, genre)' +
-       ' Values ("concerto iii allegro i", "https://drive.google.com/uc?' +
-       'export=download&id=1olVPcUkrpwby_g4w1oNewWFXft3JNbqa",' +
+       ' Values ("concerto iii allegro i", "https://incompetech.com/' +
+       'music/royalty-free/mp3-royaltyfree/Who%20Likes%20to%20Party.mp3",'+
        '"dogsounds", "classical");', cb);
    });
 
    cbs.push(cb => {
       req.cnn.query('insert into Song (title, link, artist, genre)' +
-       ' Values ("funkeriffic", "https://drive.google.com/uc?export=' +
-       'download&id=1o72Z3OPYJGKNFQM6tvh-PDsqEv5tQh7W",' +
-       '"kevin macleod", "jazz");', cb);
+       ' Values ("funkeriffic", "https://www.bensound.com/bensound-' + 
+       'music/bensound-memories.mp3", "kevin macleod", "jazz");', cb);
    });
 
    cbs.push(cb => {
       req.cnn.query('insert into Song (title, link, artist, genre) Values' +
-      '("martini sunset", "https://drive.google.com/uc?export=download&id=1' +
-      'tqiPW6idif-OSUNiHeKUoF74hZpGgI_D", "anonymous", "jazz");', cb);
+      '("martini sunset", "https://www.bensound.com/bensound-music/' +
+      'bensound-cute.mp3", "anonymous", "jazz");', cb);
    });
 
 
